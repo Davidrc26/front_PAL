@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+$primary-color: #504B38;
+$secondary-color: #B9B28A;
+$tertiary-color: #EBE5C2;
+$bg-color: #f6f4ea;
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  )); 
+}/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; background-color: $bg-color !important;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.sidenav{
+  background-color: $primary-color !important;
+}
+.custom-text{
+  color: white !important;
+}
+.sidenav-container{
+  background-color: $bg-color !important;
+}
+a{
+  color: white !important;
+}
+span{
+  color: white !important;
+}
+.toolbar{
+  background-color: $secondary-color !important;
+  color: white !important;
+}

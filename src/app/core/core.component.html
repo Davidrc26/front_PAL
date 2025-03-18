@@ -1,0 +1,16 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar class="custom-text">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item (click)="navigate('/users')">Users</a>
+      <a mat-list-item (click)="navigate('/courses')">Courses</a>
+      <a mat-list-item (click)="navigate('/categories')">Categories</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
