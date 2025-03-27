@@ -4,6 +4,5 @@ export interface Category{
 }
 
 export interface CategoryCreate{
-    // id: number;
     name: string;
 }

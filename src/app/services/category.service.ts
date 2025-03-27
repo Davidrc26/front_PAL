@@ -24,7 +24,7 @@ export class CategoryService {
     return this.http.post<Category>(`${BASE_URL}categories/create`, body);
   }
 
-  public updateUser(id: number, body: CategoryCreate): Observable<Category>{
+  public updateCategory(id: number, body: CategoryCreate): Observable<Category>{
     return this.http.put<Category>(`${BASE_URL}categories/update/${id}`, body);
   }
 

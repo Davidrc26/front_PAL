@@ -88,7 +88,7 @@ export class CreateComponent implements OnInit, OnChanges {
       ...this.categoryForm.value
     };
 
-    this.categoryService.updateUser(this.categoryToUpdate!.id, category).subscribe({
+    this.categoryService.updateCategory(this.categoryToUpdate!.id, category).subscribe({
       next: (category: Category) => {
         console.log('Category updated with id: ', category.id);
         this.openCloseModal();

@@ -9,4 +9,12 @@ export const routes: Routes = [
         path: 'categories',
         loadComponent: () => import('./core/category/list-category/list-category.component'),
     },
+    {
+        path: 'contents',
+        loadComponent: () => import('./core/contents/list-contents/list-contents.component'),
+    },
+    {
+        path: 'courses',
+        loadComponent: () => import('./core/courses/list-courses/list-courses.component'),
+    },
 ];
