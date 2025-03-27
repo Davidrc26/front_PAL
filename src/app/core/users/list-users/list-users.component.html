@@ -39,8 +39,12 @@
                   <tr class="border-b dark:border-gray-700">
                       <th scope="row" class="px-4 py-3">{{user.id}}</th>
                       <td class="px-4 py-3">{{user.username}}</td>
-                      <td class="px-4 py-3">{{user.roles}}</td>
-                      <td class="px-4 py-3 flex items-center justify-end">
+                      <td class="px-4 py-3"><ul>
+                        @for (role of user.roles; track role.id) {
+                          <li>{{role.name}}</li>
+                        }
+                      </ul></td>
+                      <td class="px-4 py-3 flex items-center justify-center">
                         <button (click)="deleteUser(user.id)">Eliminar</button>&nbsp;&nbsp;
                         <button (click)="goToUpdateUser(user)">Editar</button>
                       </td>
