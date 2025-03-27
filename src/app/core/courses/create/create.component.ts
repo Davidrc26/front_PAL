@@ -19,6 +19,10 @@ import {
 } from '@angular/forms';
 import { Course, CourseCreate } from '../../../models/course';
 import { CourseService } from '../../../services/course.service';
+import { Category } from '../../../models/category';
+import { CategoryService } from '../../../services/category.service';
+import { User } from '../../../models/user';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-create',
@@ -34,9 +38,16 @@ export class CreateComponent implements OnInit, OnChanges {
   public courseForm!: FormGroup;
   public isEdit: boolean = false;
   private courseService = inject(CourseService);
+  private categoryService = inject(CategoryService);
+  private userService = inject(UserService);
+  public categories: Array<Category> = [];
+  public instructors: Array<User> = [];
+
 
   ngOnInit(): void {
     this.buildForm();
+    this.getCategories();
+    this.getInstructors();
   }
 
   buildForm(): void {
@@ -55,16 +66,38 @@ export class CreateComponent implements OnInit, OnChanges {
       ]),
       instructor: new FormControl('', [
         Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(1),
       ]),
       category: new FormControl('', [
         Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(1),
       ]),
     });
   }
 
 
+  getCategories(){
+    this.categoryService.getAllCategories().subscribe({
+      next: (categories: Array<Category>) => {
+        this.categories = categories;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+
+  getInstructors(){
+    this.userService.getAllUsers().subscribe({
+      next: (instructors: Array<User>) => {
+        this.instructors = instructors.filter((user) => user.roles.some((role) => role.name === 'instructor'));
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+
+  }
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['openModal']) {
       if (this.courseToUpdate) {
@@ -73,8 +106,8 @@ export class CreateComponent implements OnInit, OnChanges {
           title: this.courseToUpdate.title, 
           description: this.courseToUpdate.description,
           price: this.courseToUpdate.price,
-          instructor: this.courseToUpdate.instructor,
-          category: this.courseToUpdate.category
+          instructor: this.courseToUpdate.instructor.id,
+          category: this.courseToUpdate.category.id
         });
       }
       this.openCloseModal();
@@ -82,7 +115,9 @@ export class CreateComponent implements OnInit, OnChanges {
   }
 
   createCourse(): void {
+    console.log(this.courseForm.value);
     if (!this.courseForm.valid) {
+      console.log('Invalid form');
       return;
     }
     let course: CourseCreate = {
