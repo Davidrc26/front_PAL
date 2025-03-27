@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Content, ContentCreate } from '../models/content';
@@ -25,10 +25,10 @@ export class ContentService {
   }
 
   public createContent2(contentData: FormData): Observable<Content> {
-    return this.http.post<Content>(`${BASE_URL}/contents/create`, contentData);
+    return this.http.post<Content>(`${BASE_URL}contents/create`, contentData);
   }
 
-  public updateContent(id: number, body: ContentCreate): Observable<Content>{
+  public updateContent(id: number, body: FormData): Observable<Content>{
     return this.http.put<Content>(`${BASE_URL}contents/update/${id}`, body);
   }
 
@@ -38,5 +38,13 @@ export class ContentService {
 
   public getContentById(id: number): Observable<Content>{
     return this.http.get<Content>(`${BASE_URL}contents/${id}`);
+  }
+
+  downloadContent(fileName: string): Observable<HttpResponse<Blob>> {
+    return this.http.get(`${BASE_URL}contents/download`, {
+      params: { name: fileName },
+      observe: 'response', 
+      responseType: 'blob', 
+    });
   }
 }

@@ -42,7 +42,8 @@
 						<td class="px-4 py-3">{{content.type}}</td>
 						<td class="px-4 py-3 flex items-center justify-end">
 						  <button (click)="deleteContent(content.id)">Eliminar</button>&nbsp;&nbsp;
-						  <button (click)="goToUpdateContent(content)">Editar</button>
+						  <button (click)="goToUpdateContent(content)">Editar</button>&nbsp;&nbsp;
+						  <button (click)="downloadContent(content.file_url)">Descargar</button>
 						</td>
 					</tr>
 				  }

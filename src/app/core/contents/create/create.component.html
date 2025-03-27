@@ -33,16 +33,18 @@
                             <small class="text-red-800" >This field must be at least 3 characters</small>
                             }
                     </div>
-                    <!-- <div>
+                    <div>
                         <label for="file_url" class="block mb-2 text-sm font-medium text-gray-900">File URL</label>
                         <input type="file" id="file_url" 
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                             (change)="onFileSelected($event)">
                         <small class="text-gray-500">Select a file from your computer.</small>
-                        <div *ngIf="selectedFileName" class="mt-2 text-sm text-gray-700">
-                            Selected file: {{ selectedFileName }}
-                        </div>
-                    </div> -->
+                        @if(selectedFile){
+                            <div  class="mt-2 text-sm text-gray-700">
+                                Selected file: {{ selectedFile.name }}
+                            </div>
+                        }
+                    </div>
                     <div>
                         <label for="brand" class="block mb-2 text-sm font-medium text-gray-900">Type</label>
                         <input formControlName="type" placeholder="Type of content"

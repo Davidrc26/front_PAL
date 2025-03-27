@@ -48,4 +48,22 @@ export default class ListContentsComponent implements OnInit{
     this.contentToUpdate = content;
   }
 
+
+  downloadContent(fileName: string): void {
+    this.contentService.downloadContent(fileName).subscribe({
+      next: (data) => {
+        const contentType = data.headers.get('Content-Type') || 'application/octet-stream'; // Obtén el tipo de contenido de los headers
+        const blob = new Blob([data.body!], { type: contentType }); // Usa el tipo de contenido de los headers
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName; // Nombre del archivo
+        a.click();
+        window.URL.revokeObjectURL(url); 
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
 }
