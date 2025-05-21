@@ -1,32 +1,57 @@
-
-
-<div class="flex justify-content-around w-full mx-[50px]">
-
-
-    @for(course of courses; track course.id){
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
-        <a href="#">
-            <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
-        </a>
-        <div class="p-5">
-            <a href="#">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{course.title}}</h5>
-            </a>
-            <p class="mb-3 font-normal text-gray-700">{{course.description}}</p>
-            <a href="#" (click)="goToPay(course)"
-                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                Enrroll Now
-                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M1 5h12m0 0L9 1m4 4L9 9" />
-                </svg>
-            </a>
+<div class="mx-auto max-w-screen-xl px-2 lg:px-5">
+    <div class="flex items-center justify-center mt-0 mb-4 w-full">
+        <h1 class="text-2xl font-bold text-gray-900">Nuestros cursos</h1>
+    </div>
+    <div class="flex flex-col md:flex-row items-center justify-center space-y-3 md:space-y-0 md:space-x-4 p-4">
+        <div class="w-full md:w-1/2">
+            <form class="flex items-center">
+                <label for="simple-search" class="sr-only">Search</label>
+                <div class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg aria-hidden="true" class="w-5 h-5 text-gray-500" fill="currentColor" viewbox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <input type="text" id="simple-search"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 "
+                        placeholder="Search" required="">
+                </div>
+            </form>
         </div>
     </div>
-    }
+    <div class="flex flex-wrap justify-around w-full mx-[50px]">
+
+        @for(course of courses; track course.id){
+        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm mb-[50px]">
+            <a href="#">
+                <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+            </a>
+            <div class="p-5">
+                <a href="#">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{course.title}}</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700">{{course.description}}</p>
+
+                <p class="mb-3 font-bold text-gray-700 center">Price: {{course.price.toLocaleString('es-CO', { style:
+                    'currency', currency: 'USD'})}}</p>
+                <a (click)="goToPay(course)"
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                    Enrroll Now
+                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        }
 
 
+    </div>
 </div>
 
 
@@ -55,27 +80,29 @@
                 <div class="grid gap-4 mb-4 sm:grid-cols-2">
                     <div>
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Amount</label>
-                        <input type="text" name="name" id="name"
+                        <input type="number" name="name" id="name"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                            placeholder="Type your username" formControlName="username">
-                        @if(paymentForm.get('username')?.touched && paymentForm.get('username')?.hasError('required')){
+                            formControlName="amount">
+                        @if(paymentForm.get('amount')?.touched && paymentForm.get('amount')?.hasError('required')){
                         <small class="text-red-800">This field is required</small>
                         }
-                        @if(paymentForm.get('username')?.touched && paymentForm.get('username')?.hasError('minlength')){
+                        @if(paymentForm.get('amount')?.touched && paymentForm.get('amount')?.hasError('minlength')){
                         <small class="text-red-800">This field must be at least 3 characters</small>
                         }
 
                     </div>
-                    <button type="submit"
-                        class="text-white inline-flex items-center bg-[#504B38] hover:bg-[#B9B28A] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-                        (click)="pay()">
-                        Save
-                    </button>&nbsp;&nbsp;
-                    <button
-                        class="text-white inline-flex items-center bg-gray-700 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-                        (click)="openCloseModal()">
-                        Cancel
-                    </button>
+                    <div class="ml-auto mt-auto">
+                        <button type="submit"
+                            class="text-white inline-flex items-center bg-[#504B38] hover:bg-[#B9B28A] focus:ring-4 h-auto focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                            (click)="pay()">
+                            Pay
+                        </button>&nbsp;&nbsp;
+                        <button
+                            class="text-white inline-flex items-center bg-gray-700 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                            (click)="openCloseModal()">
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>

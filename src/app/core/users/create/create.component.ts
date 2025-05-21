@@ -33,7 +33,7 @@ export class CreateComponent implements OnInit, OnChanges {
   @Output() refreshList: EventEmitter<boolean> = new EventEmitter<boolean>();
   public userForm!: FormGroup;
   public isEdit: boolean = false;
-  private userService = inject(UserService);
+  private readonly userService = inject(UserService);
 
   ngOnInit(): void {
     this.buildForm();

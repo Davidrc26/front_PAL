@@ -5,10 +5,10 @@
 @use '@angular/material' as mat;
 @import 'tailwindcss';
 
-$primary-color: #504B38;
-$secondary-color: #B9B28A;
-$tertiary-color: #EBE5C2;
-$bg-color: #f6f4ea;
+$primary-color: #213448;
+$secondary-color: #547792;
+$tertiary-color: #94B4C1;
+$bg-color: #e7e7e7;
 html {
   @include mat.theme((
     color: (
@@ -42,4 +42,12 @@ span{
 .toolbar{
   background-color: $secondary-color !important;
   color: white !important;
+}
+
+::ng-deep .bg-table{
+    background-color: #cecece;
+}
+::ng-deep .table-header{
+    background-color: #547792;
+    color: white;
 }
