@@ -71,7 +71,7 @@ export class CreateComponent implements OnInit, OnChanges {
     }
     let user: UserCreate = {
       ...this.userForm.value,
-      roles: ['user'],
+      roles: ['student'],
     };
 
     this.userService.createUser(user).subscribe({
