@@ -15,12 +15,20 @@
                 </a>
                 <p class="mb-3 font-normal text-gray-700">{{enroll.course.description}}</p>
 
-                <p class="mb-3 font-normal text-gray-700 center"><strong>Price:</strong> {{enroll.course.price.toLocaleString('es-CO', { style:
+                <p class="mb-3 font-normal text-gray-700 center"><strong>Price:</strong>
+                    {{enroll.course.price.toLocaleString('es-CO', { style:
                     'currency', currency: 'USD'})}}</p>
 
                 <p class="mb-3 font-normal text-gray-700 center"><strong>Status:</strong> {{enroll.state}}</p>
-                <p class="mb-3 font-normal text-gray-700 center"><strong>Start date:</strong> {{enroll.enrollment_date | date:'dd/MM/yyyy'}}</p>
-                
+                <p class="mb-3 font-normal text-gray-700 center"><strong>Start date:</strong> {{enroll.enrollment_date |
+                    date:'dd/MM/yyyy'}}</p>
+
+                @if(enroll.state == 'COMPLETED'){
+                    <button (click)="downloadCertificate(enroll)"
+                        class="mt-2 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+                        Download Certificate
+                    </button>
+                }
             </div>
         </div>
         }
@@ -28,4 +36,3 @@
 
     </div>
 </div>
-

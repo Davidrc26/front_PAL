@@ -29,5 +29,26 @@ export default class ListMyCoursesComponent implements OnInit {
     });
   }
 
+  downloadCertificate(enrollment: Enrollment): void {
+    let data = {
+      user_id: enrollment.user.id,
+      course_id: enrollment.course.id
+    }
+    this.enrollmentService.downloadCertificate(data).subscribe({
+      next: (response) => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `certificate_${enrollment.course.title}.pdf`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error: (error) => {
+        console.error('Error downloading certificate:', error);
+      }
+    });
+  }
+
   
 }

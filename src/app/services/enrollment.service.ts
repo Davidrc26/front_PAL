@@ -21,4 +21,8 @@ export class EnrollmentService {
   getMyCourses(): Observable<Enrollment[]> {
     return this.http.get<Enrollment[]>(`${BASE_URL}/my-courses/${1}`);
   }
+
+  downloadCertificate(data: { user_id: number, course_id: number }): Observable<Blob> {
+    return this.http.post(`${environment.apiUrl}certificates/generate?courseId=${data.course_id}&userId=${data.user_id}`, {}, { responseType: 'blob' });
+  }
 }
