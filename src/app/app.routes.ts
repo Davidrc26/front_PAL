@@ -20,5 +20,9 @@ export const routes: Routes = [
     {
         path: 'sale_courses',
         loadComponent: () => import('./core/courses/dashbboard-register/dashbboard-register.component'),
+    },
+    {
+        path: 'my_courses',
+        loadComponent: () => import('./core/courses/list-my-courses/list-my-courses.component'),
     }
 ];

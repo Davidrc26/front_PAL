@@ -17,4 +17,8 @@ export class EnrollmentService {
   createEnrollment(body: EnrollmentCreate) : Observable<Enrollment>{
     return this.http.post<Enrollment>(`${BASE_URL}/register`, body);
   }
+
+  getMyCourses(): Observable<Enrollment[]> {
+    return this.http.get<Enrollment[]>(`${BASE_URL}/my-courses/${1}`);
+  }
 }
