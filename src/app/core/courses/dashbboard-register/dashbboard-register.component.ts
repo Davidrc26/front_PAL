@@ -33,9 +33,15 @@ export default class DashbboardRegisterComponent implements OnInit {
   paymentForm!: FormGroup;
   currentCourse: Course | null = null;
   searchForm!: FormGroup;
+   public difficulties: Array<string> = [
+    'Basic',
+    'Intermediate',
+    'Advanced',
+  ];
   private readonly courseService = inject(CourseService);
   private readonly paymentService = inject(PaymentService);
   private readonly enrollmentService = inject(EnrollmentService);
+
 
   ngOnInit(): void {
     this.getCourses();
@@ -48,7 +54,7 @@ export default class DashbboardRegisterComponent implements OnInit {
     });
 
     this.searchForm = new FormGroup({
-      query: new FormControl(null),
+      query: new FormControl(''),
       free: new FormControl(null),
       orderBy: new FormControl(null),
       dificulty: new FormControl(null),
@@ -61,6 +67,7 @@ export default class DashbboardRegisterComponent implements OnInit {
     this.courseService.getAllCourses().subscribe({
       next: (response) => {
         this.courses = response;
+        this.clearData();
       },
       error: (error) => {
         alert(error.error.message);
@@ -76,7 +83,7 @@ export default class DashbboardRegisterComponent implements OnInit {
     const query = this.searchForm.get('query')?.value;
     const queryParams: QueryParams = {
       free: this.searchForm.get('free')?.value,
-      dificulty: this.searchForm.get('dificulty')?.value,
+      difficulty: this.searchForm.get('dificulty')?.value,
       minRating: this.searchForm.get('minRating')?.value,
       orderBy: this.searchForm.get('orderBy')?.value,
     };
@@ -111,6 +118,13 @@ export default class DashbboardRegisterComponent implements OnInit {
     this.currentCourse = null;
     this.paymentForm.reset({
       amount: 0,
+    });
+    this.searchForm.reset({
+      query: '',
+      free: null,
+      orderBy: null,
+      dificulty: null,
+      minRating: null,
     });
   }
 

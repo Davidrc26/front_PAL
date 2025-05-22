@@ -42,6 +42,11 @@ export class CreateComponent implements OnInit, OnChanges {
   private userService = inject(UserService);
   public categories: Array<Category> = [];
   public instructors: Array<User> = [];
+  public difficulties: Array<string> = [
+    'Basic',
+    'Intermediate',
+    'Advanced',
+  ];
 
 
   ngOnInit(): void {
@@ -69,6 +74,10 @@ export class CreateComponent implements OnInit, OnChanges {
         Validators.minLength(1),
       ]),
       category: new FormControl('', [
+        Validators.required,
+        Validators.minLength(1),
+      ]),
+      difficulty: new FormControl('', [
         Validators.required,
         Validators.minLength(1),
       ]),
@@ -107,7 +116,8 @@ export class CreateComponent implements OnInit, OnChanges {
           description: this.courseToUpdate.description,
           price: this.courseToUpdate.price,
           instructor: this.courseToUpdate.instructor.id,
-          category: this.courseToUpdate.category.id
+          category: this.courseToUpdate.category.id,
+          difficulty: this.courseToUpdate.difficulty,
         });
       }
       this.openCloseModal();

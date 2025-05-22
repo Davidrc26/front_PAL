@@ -6,6 +6,9 @@ export interface Course{
 	title: string;
     description: string;
 	price: number;
+	difficulty: string;
+	createdAt: Date;
+	averageRating: number;
 	instructor: User;
 	category: Category; 
 	contents: Array<string>;
@@ -15,6 +18,7 @@ export interface CourseCreate{
     title: string;
     description: string;
 	price: number;
+	difficulty: string;
 	instructor: number;
 	category: number;
 }
